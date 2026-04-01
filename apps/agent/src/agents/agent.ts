@@ -1,5 +1,5 @@
 import { createAgent } from "langchain";
-import { moonShotLLM } from "../llms/llm";
+import { fakerModel, moonShotLLM } from "../llms/llm";
 import { SYSTEM_PROMPT } from "../prompts/SYSTEM_PROMPT";
 import { weatherTool } from "../tools/weather";
 
