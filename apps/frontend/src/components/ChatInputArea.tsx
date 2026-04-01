@@ -18,11 +18,11 @@ export function ChatInputArea({
   return (
     <div className="mx-auto w-full max-w-3xl shrink-0 p-4 md:p-6">
       <PromptInput
-        className="relative flex w-full flex-col rounded-2xl border border-[#222] bg-[#111] p-2 shadow-sm transition-colors focus-within:border-[#333]"
+        className="bg-background border-border focus-within:border-primary relative flex w-full flex-col rounded-3xl border p-2 shadow-sm transition-colors"
         onSubmit={onSubmit}
       >
         <PromptInputTextarea
-          className="min-h-[50px] resize-none border-0 bg-transparent p-3 text-white placeholder:text-[#555] focus-visible:ring-0 sm:text-sm"
+          className="text-foreground placeholder:text-muted-foreground min-h-[50px] resize-none border-0 bg-transparent p-3 focus-visible:ring-0 sm:text-sm"
           placeholder="Ask anything..."
           value={input}
           onChange={(e: any) => setInput(e.target.value)}
@@ -33,7 +33,7 @@ export function ChatInputArea({
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 rounded-full text-[#aaa] hover:bg-[#222] hover:text-white"
+              className="text-muted-foreground hover:text-foreground hover:bg-accent h-8 w-8 rounded-full"
               type="button"
             >
               <Paperclip className="h-4 w-4" />
@@ -43,7 +43,7 @@ export function ChatInputArea({
             type="submit"
             size="icon"
             disabled={!input.trim()}
-            className="h-8 w-8 rounded-full bg-white text-black transition-opacity hover:bg-gray-200 disabled:opacity-50"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 ml-2 h-8 w-8 shrink-0 rounded-full transition-opacity disabled:opacity-50"
           >
             <ArrowUp className="h-4 w-4" />
           </Button>

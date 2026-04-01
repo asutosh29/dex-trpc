@@ -31,8 +31,8 @@ export function ChatMessageList({
             <Message from={msg.role} className="w-full">
               <div className="flex gap-4">
                 {msg.role === "assistant" ? (
-                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#333] bg-[#1A1A1A]">
-                    <Sparkles className="h-4 w-4 fill-current text-gray-300" />
+                  <div className="border-border bg-accent mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border shadow-sm">
+                    <Sparkles className="text-muted-foreground h-4 w-4 fill-current" />
                   </div>
                 ) : null}
                 <div
@@ -41,11 +41,13 @@ export function ChatMessageList({
                   <MessageContent
                     className={`inline-block ${
                       msg.role === "user"
-                        ? "rounded-3xl bg-[#222] px-5 py-3 text-white"
+                        ? "bg-secondary text-secondary-foreground rounded-3xl px-5 py-3"
                         : ""
                     }`}
                   >
-                    <MessageResponse>{msg.content}</MessageResponse>
+                    <MessageResponse className="text-[15px] leading-relaxed">
+                      {msg.content}
+                    </MessageResponse>
                   </MessageContent>
 
                   {/* Actions for Assistant */}
@@ -53,13 +55,13 @@ export function ChatMessageList({
                     <MessageToolbar className="mt-2">
                       <MessageActions>
                         <MessageAction tooltip="Copy message">
-                          <Copy className="h-4 w-4 text-gray-400" />
+                          <Copy className="text-muted-foreground h-4 w-4" />
                         </MessageAction>
                         <MessageAction tooltip="Helpful">
-                          <ThumbsUp className="h-4 w-4 text-gray-400" />
+                          <ThumbsUp className="text-muted-foreground h-4 w-4" />
                         </MessageAction>
                         <MessageAction tooltip="Not helpful">
-                          <ThumbsDown className="h-4 w-4 text-gray-400" />
+                          <ThumbsDown className="text-muted-foreground h-4 w-4" />
                         </MessageAction>
                       </MessageActions>
                     </MessageToolbar>
@@ -75,11 +77,11 @@ export function ChatMessageList({
           <div className="flex w-full">
             <Message from="assistant" className="w-full">
               <div className="flex gap-4">
-                <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#333] bg-[#1A1A1A]">
-                  <Sparkles className="h-4 w-4 fill-current text-gray-300" />
+                <div className="border-border bg-accent mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border shadow-sm">
+                  <Sparkles className="text-muted-foreground h-4 w-4 fill-current" />
                 </div>
-                <div className="flex flex-1 items-center">
-                  <span className="animate-pulse font-medium text-gray-400">
+                <div className="flex h-9 flex-1 items-center">
+                  <span className="text-muted-foreground animate-pulse font-medium">
                     Thinking...
                   </span>
                 </div>

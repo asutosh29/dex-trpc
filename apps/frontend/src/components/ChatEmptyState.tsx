@@ -15,7 +15,7 @@ export function ChatEmptyState({
       <h1 className="mb-2 text-3xl font-semibold tracking-tight md:text-4xl">
         What can I help with?
       </h1>
-      <p className="mb-12 text-[#a1a1aa]">
+      <p className="text-muted-foreground mb-12">
         Ask a question, write code, or explore ideas.
       </p>
 
@@ -23,7 +23,7 @@ export function ChatEmptyState({
         {SUGGESTIONS.map((suggestion, idx) => (
           <button
             key={idx}
-            className="flex items-center rounded-xl border border-[#222] bg-[#111] p-4 text-left text-sm shadow-sm transition-colors hover:bg-[#1A1A1A]"
+            className="border-border bg-card/50 hover:bg-accent/50 text-card-foreground flex items-center rounded-xl border p-4 text-left text-sm shadow-sm transition-colors"
             onClick={() => onSuggestionClick(suggestion)}
           >
             {suggestion}
