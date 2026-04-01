@@ -13,19 +13,20 @@ export function Chat() {
     input,
     setInput,
     messages,
-    isThinking,
+    isStreaming,
+    isReasoningStreaming,
     handleSubmit,
     handleSuggestionClick,
   } = useChatSimulation();
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom of chat when new messages arrive or isThinking changes
+  // Auto-scroll to bottom of chat when new messages arrive or streaming changes
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages, isThinking]);
+  }, [messages, isStreaming]);
 
   return (
     <>
@@ -38,12 +39,13 @@ export function Chat() {
           <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
         </header>
 
-        {messages.length === 0 && !isThinking ? (
+        {messages.length === 0 && !isStreaming ? (
           <ChatEmptyState onSuggestionClick={handleSuggestionClick} />
         ) : (
           <ChatMessageList
             messages={messages}
-            isThinking={isThinking}
+            isStreaming={isStreaming}
+            isReasoningStreaming={isReasoningStreaming}
             scrollRef={scrollRef}
           />
         )}
