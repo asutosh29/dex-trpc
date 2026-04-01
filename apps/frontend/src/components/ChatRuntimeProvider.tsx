@@ -1,14 +1,40 @@
-import { type ReactNode } from "react";
-import { useNavigate } from "react-router";
+import { type ReactNode, useEffect, useMemo } from "react";
+import { useParams, useNavigate } from "react-router";
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { useLangGraphRuntime } from "@assistant-ui/react-langgraph";
 import { trpcClient } from "../lib/trpc";
 import { WeatherToolUI } from "./tools/WeatherToolUI";
 
 export function ChatRuntimeProvider({ children }: { children: ReactNode }) {
+  const { threadId } = useParams();
   const navigate = useNavigate();
 
+  const threadListAdapter = useMemo(() => ({
+    async list() {
+      const threads = await trpcClient.agent.thread.list.query();
+      return {
+        threads: threads.map((t: any) => ({
+          id: t.thread_id,
+          externalId: t.thread_id,
+          status: "regular" as const,
+          title: t.metadata?.title || "New Thread",
+        })),
+      };
+    },
+    async fetch(id: string) {
+      return { id, externalId: id, status: "regular" as const, title: "Chat" };
+    },
+    async delete(id: string) {
+      await trpcClient.agent.thread.delete.mutate({ id });
+      if (threadId === id) navigate("/chat", { replace: true });
+    },
+    async rename(id: string, newTitle: string) {
+      await trpcClient.agent.thread.rename.mutate({ id, title: newTitle });
+    }
+  }), [threadId, navigate]);
+
   const runtime = useLangGraphRuntime({
+    adapters: { threadList: threadListAdapter } as any,
     stream: async function* (messages, { initialize, command }) {
       const { externalId } = await initialize();
       if (!externalId) throw new Error("Thread not initialized");
@@ -51,6 +77,14 @@ export function ChatRuntimeProvider({ children }: { children: ReactNode }) {
       navigate("/chat", { replace: true });
     },
   });
+
+  useEffect(() => {
+    if (threadId) {
+      runtime.threads?.switchToThread(threadId);
+    } else {
+      runtime.threads?.switchToNewThread();
+    }
+  }, [threadId, runtime]);
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
