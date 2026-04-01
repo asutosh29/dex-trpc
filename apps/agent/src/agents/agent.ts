@@ -1,8 +1,8 @@
 import { createAgent } from "langchain";
+
 import { moonShotLLM } from "../llms/llm";
 import { SYSTEM_PROMPT } from "../prompts/SYSTEM_PROMPT";
 import { weatherTool } from "../tools/weather";
-
 
 export const agent = createAgent({
   model: moonShotLLM,

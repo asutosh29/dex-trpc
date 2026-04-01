@@ -1,12 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@repo/ui/index.css'
-import { BrowserRouter, Route, Routes } from 'react-router'
-import Home from './pages/Home/Home.tsx'
-import Chat from './pages/Chat/Chat.tsx'
-import { ThemeProvider } from '@repo/ui/components/theme-provider'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router";
 
-createRoot(document.getElementById('root')!).render(
+import { ThemeProvider } from "@repo/ui/components/theme-provider";
+import "@repo/ui/index.css";
+
+import Chat from "./pages/Chat/Chat.tsx";
+import Home from "./pages/Home/Home.tsx";
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
@@ -17,4 +19,4 @@ createRoot(document.getElementById('root')!).render(
       </BrowserRouter>
     </ThemeProvider>
   </StrictMode>
-)
+);

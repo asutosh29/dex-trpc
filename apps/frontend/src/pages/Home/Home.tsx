@@ -1,15 +1,18 @@
-import { Button } from "@repo/ui/components/ui/button"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router";
+
+import { Button } from "@repo/ui/components/ui/button";
 
 const Home = () => {
-  const router = useNavigate()
+  const router = useNavigate();
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center">
+    <div className="flex h-screen w-full flex-col items-center justify-center">
       <h1 className="text-8xl font-bold">Dex Agent</h1>
       <p>All in one CMS Agent for Dex</p>
-      <Button variant={"destructive"} onClick={() => router("/chat")}>Try now!</Button>
+      <Button variant={"destructive"} onClick={() => router("/chat")}>
+        Try now!
+      </Button>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
