@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import type { MockMessage } from "../components/ChatMessageList";
+import type { MockMessage } from "../components/Chat/chat-body/ChatMessageList";
 
 // --- Mock Response Generators ---
 

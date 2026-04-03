@@ -1,4 +1,4 @@
-import type { RefObject } from "react";
+import { useEffect, useRef } from "react";
 
 import { Copy, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
 
@@ -28,13 +28,20 @@ export function ChatMessageList({
   messages,
   isStreaming,
   isReasoningStreaming,
-  scrollRef,
 }: {
   messages: MockMessage[];
   isStreaming: boolean;
   isReasoningStreaming: boolean;
-  scrollRef: RefObject<HTMLDivElement | null>;
 }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom of chat when new messages arrive or streaming changes
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, isStreaming]);
+
   return (
     <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-8">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
