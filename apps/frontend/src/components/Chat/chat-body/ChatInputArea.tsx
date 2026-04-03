@@ -6,15 +6,10 @@ import {
 } from "@repo/ui/components/ai-elements/prompt-input";
 import { Button } from "@repo/ui/components/ui/button";
 
-export function ChatInputArea({
-  input,
-  setInput,
-  onSubmit,
-}: {
-  input: string;
-  setInput: (val: string) => void;
-  onSubmit: (message: any, event?: React.FormEvent) => void;
-}) {
+import { useChatContext } from "../context/ChatProvider";
+
+export function ChatInputArea() {
+  const { input, setInput, handleSubmit: onSubmit } = useChatContext();
   return (
     <div className="mx-auto w-full max-w-3xl shrink-0 p-4 md:p-6">
       <PromptInput
