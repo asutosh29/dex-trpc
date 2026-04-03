@@ -37,19 +37,32 @@ export function useAgentChat() {
 
   // Map stream messages back to MockMessage format
   const streamMessages: MockMessage[] = (stream.messages || []).map(
-    (msg: any) => {
+    (msg: any, index: number) => {
+      // Robust content extractor to avoid heavy stringification of common LangChain chunks
+      let extractedContent = "";
+      if (typeof msg.content === "string") {
+        extractedContent = msg.content;
+      } else if (Array.isArray(msg.content)) {
+        extractedContent = msg.content
+          .map((chunk: any) =>
+            typeof chunk === "string" ? chunk : chunk.text || ""
+          )
+          .join("");
+      } else {
+        extractedContent = JSON.stringify(msg.content);
+      }
+
       return {
-        id: msg.id || Date.now().toString(),
+        // By replacing Date.now() with `msg-${index}`, it instantly stops React from
+        // unmounting & thrashing the DOM for the streaming message row!
+        id: msg.id || `msg-${index}`,
         role:
           msg.type === "human" ||
           msg.role === "user" ||
           msg._getType?.() === "human"
             ? "user"
             : "assistant",
-        content:
-          typeof msg.content === "string"
-            ? msg.content
-            : JSON.stringify(msg.content),
+        content: extractedContent,
         // We don't have reasoning extracted explicitly here unless it's in a specific field
       };
     }
