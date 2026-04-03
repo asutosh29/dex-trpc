@@ -5,7 +5,7 @@ import type { AppRouter } from "@repo/server/trpc/appRouter";
 export const trpcClient = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: "http://localhost:3000",
+      url: "http://localhost:3000/trpc",
     }),
   ],
 });

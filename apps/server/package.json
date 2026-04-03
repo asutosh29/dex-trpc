@@ -16,7 +16,10 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@hono/trpc-server": "^0.4.2",
+    "@langchain/langgraph-sdk": "^1.8.4",
     "@types/cors": "^2.8.19",
-    "cors": "^2.8.6"
+    "cors": "^2.8.6",
+    "hono": "^4.12.10"
   }
 }

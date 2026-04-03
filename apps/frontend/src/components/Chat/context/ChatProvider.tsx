@@ -1,13 +1,13 @@
 import { createContext, type ReactNode, useContext } from "react";
 
-import { useChatSimulation } from "../../../hooks/useChatSimulation";
+import { useAgentChat } from "../../../hooks/useAgentChat";
 
-type ChatContextValue = ReturnType<typeof useChatSimulation>;
+type ChatContextValue = ReturnType<typeof useAgentChat>;
 
 const ChatContext = createContext<ChatContextValue | null>(null);
 
 export function ChatProvider({ children }: { children: ReactNode }) {
-  const chat = useChatSimulation();
+  const chat = useAgentChat();
   return <ChatContext.Provider value={chat}>{children}</ChatContext.Provider>;
 }
 

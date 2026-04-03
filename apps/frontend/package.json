@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@langchain/langgraph-sdk": "^1.8.3",
-    "@repo/ui": "workspace:*",
+    "@langchain/langgraph-sdk": "^1.8.4",
+    "@langchain/react": "^0.2.3",
     "@repo/agent": "workspace:*",
+    "@repo/ui": "workspace:*",
     "@tailwindcss/vite": "^4.2.2",
     "@tanstack/react-query": "^5.96.0",
     "@trpc/client": "^11.16.0",
